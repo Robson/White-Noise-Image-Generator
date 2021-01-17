@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<!-- Global site tag (gtag.js) - Google Analytics -->
+		<script async src="https://www.googletagmanager.com/gtag/js?id=G-2E561F2422"></script>
+		<script>
+		  window.dataLayer = window.dataLayer || [];
+		  function gtag(){dataLayer.push(arguments);}
+		  gtag('js', new Date());
+		  gtag('config', 'G-2E561F2422');
+		</script>
+		<!--
+		************************************************
+		The script above is for google analytics.
+		You'll want to remove that if you use this page.
+		************************************************
+		-->	
+		<title>White Noise Image Generator</title>		
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<script src="http://d3js.org/d3.v3.min.js"></script>
+		<link rel="preconnect" href="https://fonts.gstatic.com">
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rubik&display=swap"> 		
+		<link rel="stylesheet" type="text/css" href="style.css">
+	</head>
+	<body>
+		<h1>
+			White Noise Image Generator
+		</h1>
+		<p>
+			This tool allows you to generate images that simulate white noise.
+		</p>
+		<p>
+			Amount of squares horizontally:
+			<input type="number" id="lengthH" min="1" value="50" onkeyup="stats()" onchange="stats()" />
+			<br/>
+			Amount of squares vertically:
+			<input type="number" id="lengthV" min="1" value="25" onkeyup="stats()" onchange="stats()" />
+			<br/>
+			Size of squares:
+			<input type="number" id="size" min="1" value="5" onkeyup="stats()" onchange="stats()" />
+			<br/>
+			Colours:
+			<select id="colours">
+				<option value="monochrome">Monochrome</option>
+				<option value="greyscale">Greyscale</option>
+				<option disabled>----------------</option>
+				<option value="rgb_3bit">RGB 3-Bit</option>
+				<option value="rgb_6bit" selected>RGB 6-Bit</option>
+				<option value="rgb_12bit">RGB 12-Bit (Websafe)</option>				
+				<option value="rgb_24bit">RGB 24-Bit (Truecolour)</option>
+				<option disabled>----------------</option>
+				<option value="red">Red</option>
+				<option value="green">Green</option>
+				<option value="blue">Blue</option>
+				<option disabled>----------------</option>
+				<option value="light">Light</option>
+				<option value="dark">Dark</option>
+			</select>
+		</p>
+		<p>
+			<span id="warning" style="display:none;">Warning: this is massive and may freeze/crash your browser!<br/></span>
+			<input type="button" id="generate" value="Generate" onclick="generate()" />
+		</p>
+		<canvas id="noisy" width="200" height="200" onclick="generate()" style="display:none"></canvas>
+		<p>
+			Written by <a href="https://robson.plus">Robson</a>. <a href="">View the code</a>.
+		</p>		
+		<script>
+
+			function rand(min, max) {
+				return min + ~~(Math.random() * (1 + max - min))
+			}
+		
+			function generate() {
+				var canvas = document.getElementById('noisy');
+				var lengthH = document.getElementById('lengthH').value;
+				var lengthV = document.getElementById('lengthV').value;
+				var size = document.getElementById('size').value;
+				var context = canvas.getContext('2d');
+				var colours = d3.select("#colours").node().value;
+				
+				d3.select('#noisy').attr('width', lengthH * size).attr('height', lengthV * size).style('display', 'block');	
+				
+				context.fillStyle = '#ffffff';
+				context.fillRect(0, 0, lengthH * size, lengthV * size);
+
+				for (var x = 0; x < lengthH; x++) {
+					for (var y = 0; y < lengthV; y++) {
+						switch (colours) {
+							case 'monochrome':
+								if (Math.random() > .5) {				
+									context.fillStyle = '#000000';
+									context.fillRect(x * size, y * size, size, size);
+								}							
+								break;
+							case 'greyscale':
+								var grey = rand(0, 255);
+								context.fillStyle = 'rgb(' + grey + ',' + grey + ',' + grey + ')';
+								context.fillRect(x * size, y * size, size, size);
+								break;	
+							case 'rgb_3bit':
+								context.fillStyle = 'rgb(' + rand(0, 1) * 255 + ',' + rand(0, 1) * 255 + ',' + rand(0, 1) * 255 + ')';
+								context.fillRect(x * size, y * size, size, size);
+								break;
+							case 'rgb_6bit':
+								context.fillStyle = 'rgb(' + rand(0, 3) * 85 + ',' + rand(0, 3) * 85 + ',' + rand(0, 3) * 85 + ')';
+								context.fillRect(x * size, y * size, size, size);
+								break;								
+							case 'rgb_12bit':
+								context.fillStyle = 'rgb(' + rand(0, 5) * 51 + ',' + rand(0, 5) * 51 + ',' + rand(0, 5) * 51 + ')';
+								context.fillRect(x * size, y * size, size, size);
+								break;								
+							case 'rgb_24bit':
+								context.fillStyle = 'rgb(' + rand(0, 255) + ',' + rand(0, 255) + ',' + rand(0, 255) + ')';
+								context.fillRect(x * size, y * size, size, size);
+								break;
+							case 'red':
+								context.fillStyle = 'rgb(' + rand(10, 255) + ',0,0)';
+								context.fillRect(x * size, y * size, size, size);
+								break;						
+							case 'green':
+								context.fillStyle = 'rgb(0,' + rand(10, 255) + ',0)';
+								context.fillRect(x * size, y * size, size, size);
+								break;	
+							case 'blue':
+								context.fillStyle = 'rgb(0,0,' + rand(10, 255) + ')';
+								context.fillRect(x * size, y * size, size, size);
+								break;	
+							case 'light':
+								context.fillStyle = 'rgb(' + rand(128, 255) + ',' + rand(128, 255) + ',' + rand(128, 255) + ')';
+								context.fillRect(x * size, y * size, size, size);
+								break;
+							case 'dark':
+								context.fillStyle = 'rgb(' + rand(0, 128) + ',' + rand(0, 128) + ',' + rand(0, 128) + ')';
+								context.fillRect(x * size, y * size, size, size);
+								break;								
+						}
+					}
+				}
+				
+				var dataURL = canvas.toDataURL();
+				document.getElementById('noisy').src = dataURL;
+			}
+			
+			function stats() {
+				var lengthH = document.getElementById('lengthH').value;
+				var lengthV = document.getElementById('lengthV').value;
+				var size = document.getElementById('size').value;
+				var uhoh = lengthH * size >= 5000 || lengthV * size >= 5000;
+				d3.select('#generate').attr('value', "Generate (" + lengthH * size + "x" + lengthV * size + ")");
+				d3.select('#warning').style('display', uhoh ? 'inline' : 'none');
+				d3.select('#generate').style('color', uhoh ? 'red' : 'black');
+			}
+			
+			stats();
+			generate();
+			
+		</script>
+	</body>
+</html>
