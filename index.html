@@ -57,6 +57,9 @@
 				<option disabled>----------------</option>
 				<option value="light">Light</option>
 				<option value="dark">Dark</option>
+				<option disabled>----------------</option>
+				<option value="space_greyscale">Space (Greyscale)</option>
+				<option value="space_all">Space (All Colours)</option>				
 			</select>
 		</p>
 		<p>
@@ -135,7 +138,16 @@
 							case 'dark':
 								context.fillStyle = 'rgb(' + rand(0, 128) + ',' + rand(0, 128) + ',' + rand(0, 128) + ')';
 								context.fillRect(x * size, y * size, size, size);
-								break;								
+								break;				
+							case 'space_greyscale':
+								var grey = rand(0, 30);
+								context.fillStyle = 'rgb(' + grey + ',' + grey + ',' + grey + ')';
+								context.fillRect(x * size, y * size, size, size);
+								break;	
+							case 'space_all':
+								context.fillStyle = 'rgb(' + rand(0, 30) + ',' + rand(0, 30) + ',' + rand(0, 30) + ')';
+								context.fillRect(x * size, y * size, size, size);
+								break;									
 						}
 					}
 				}
