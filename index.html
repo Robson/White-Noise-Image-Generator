@@ -66,7 +66,8 @@
 			<span id="warning" style="display:none;">Warning: this is massive and may freeze/crash your browser!<br/></span>
 			<input type="button" id="generate" value="Generate" onclick="generate()" />
 		</p>
-		<canvas id="noisy" width="200" height="200" onclick="generate()" style="display:none"></canvas>
+		<canvas id="noisy" width="200" height="200" onclick="generate()"></canvas>
+		<img id="output" alt="White Noise" />
 		<p>
 			Written by <a href="https://robson.plus">Robson</a>. <a href="https://github.com/Robson/White-Noise-Image-Generator">View the code</a>.
 		</p>		
@@ -84,7 +85,8 @@
 				var context = canvas.getContext('2d');
 				var colours = d3.select("#colours").node().value;
 				
-				d3.select('#noisy').attr('width', lengthH * size).attr('height', lengthV * size).style('display', 'block');	
+				d3.select('#noisy').attr('width', lengthH * size).attr('height', lengthV * size).style('display', 'none');	
+				d3.select('#output').attr('width', lengthH * size).attr('height', lengthV * size).style('display', 'block');	
 				
 				context.fillStyle = '#ffffff';
 				context.fillRect(0, 0, lengthH * size, lengthV * size);
@@ -153,7 +155,8 @@
 				}
 				
 				var dataURL = canvas.toDataURL();
-				document.getElementById('noisy').src = dataURL;
+				//document.getElementById('noisy').src = dataURL;
+				document.getElementById('output').src = dataURL;
 			}
 			
 			function stats() {
