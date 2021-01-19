@@ -66,7 +66,7 @@
 			<span id="warning" style="display:none;">Warning: this is massive and may freeze/crash your browser!<br/></span>
 			<input type="button" id="generate" value="Generate" onclick="generate()" />
 		</p>
-		<canvas id="noisy" width="200" height="200" onclick="generate()"></canvas>
+		<canvas id="noisy"></canvas>
 		<img id="output" alt="White Noise" />
 		<p>
 			Written by <a href="https://robson.plus">Robson</a>. <a href="https://github.com/Robson/White-Noise-Image-Generator">View the code</a>.
@@ -155,7 +155,6 @@
 				}
 				
 				var dataURL = canvas.toDataURL();
-				//document.getElementById('noisy').src = dataURL;
 				document.getElementById('output').src = dataURL;
 			}
 			
