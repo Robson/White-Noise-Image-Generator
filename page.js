@@ -83,12 +83,6 @@ function handleColours(colours, context, size, x, y, bias) {
 			context.fillRect(x * size, y * size, size, size);
 			break;								
 		case 'rgb_24bit':
-			var ranges = { verylight: [170, 255], light: [128, 255], none: [0, 255], dark: [0, 128], verydark: [0, 85]}
-			var start, end;
-			[start, end] = ranges[bias];
-			context.fillStyle = 'rgb(' + rand(start, end) + ',' + rand(start, end) + ',' + rand(start, end) + ')';
-			context.fillRect(x * size, y * size, size, size);
-			break;
 		case 'red':
 		case 'green':
 		case 'blue':
@@ -105,6 +99,9 @@ function handleColours(colours, context, size, x, y, bias) {
 				case 'blue':
 					context.fillStyle = 'rgb(0,0,' + rand(start, end) + ')';		
 					break;
+				case 'rgb_24bit':
+					context.fillStyle = 'rgb(' + rand(start, end) + ',' + rand(start, end) + ',' + rand(start, end) + ')';	
+					break;					
 			}			
 			context.fillRect(x * size, y * size, size, size);
 			break;							
