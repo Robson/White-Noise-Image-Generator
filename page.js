@@ -69,59 +69,23 @@ function handleColours(colours, context, size, x, y, bias) {
 			context.fillRect(x * size, y * size, size, size);
 			break;
 		case 'rgb_6bit':
-			var start = 0, end = 3;
-			switch (bias) {
-				case 'verylight':
-					[start, end] = [2, 3];
-					break;
-				case 'light':
-					[start, end] = [1, 3];
-					break;
-				case 'dark':
-					[start, end] = [0, 2];
-					break;
-				case 'verydark':
-					[start, end] = [0, 1];
-					break;							
-			}					
+			var ranges = { verylight: [2, 3], light: [1, 3], none: [0, 3], dark: [0, 2], verydark: [0, 1]}
+			var start, end;
+			[start, end] = ranges[bias];
 			context.fillStyle = 'rgb(' + rand(start, end) * 85 + ',' + rand(start, end) * 85 + ',' + rand(start, end) * 85 + ')';
 			context.fillRect(x * size, y * size, size, size);
 			break;								
 		case 'rgb_12bit':
-			var start = 0, end = 5;
-			switch (bias) {
-				case 'verylight':
-					[start, end] = [3, 5];
-					break;
-				case 'light':
-					[start, end] = [1, 5];
-					break;
-				case 'dark':
-					[start, end] = [0, 4];
-					break;
-				case 'verydark':
-					[start, end] = [0, 2];
-					break;							
-			}
+			var ranges = { verylight: [3, 5], light: [1, 5], none: [0, 5], dark: [0, 4], verydark: [0, 2]}
+			var start, end;
+			[start, end] = ranges[bias];
 			context.fillStyle = 'rgb(' + rand(start, end) * 51 + ',' + rand(start, end) * 51 + ',' + rand(start, end) * 51 + ')';
 			context.fillRect(x * size, y * size, size, size);
 			break;								
 		case 'rgb_24bit':
-			var start = 0, end = 255;
-			switch (bias) {
-				case 'verylight':
-					[start, end] = [170, 255];
-					break;
-				case 'light':
-					[start, end] = [128, 255];
-					break;
-				case 'dark':
-					[start, end] = [0, 128];
-					break;
-				case 'verydark':
-					[start, end] = [0, 85];
-					break;							
-			}				
+			var ranges = { verylight: [170, 255], light: [128, 255], none: [0, 255], dark: [0, 128], verydark: [0, 85]}
+			var start, end;
+			[start, end] = ranges[bias];
 			context.fillStyle = 'rgb(' + rand(start, end) + ',' + rand(start, end) + ',' + rand(start, end) + ')';
 			context.fillRect(x * size, y * size, size, size);
 			break;
