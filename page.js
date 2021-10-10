@@ -36,40 +36,16 @@ function handleColours(colours, context, size, x, y, bias) {
 		case 'monochrome':
 			context.fillStyle = '#000000';
 			var isDrawing = Math.random() > .5;
-			switch (bias) {
-				case 'verylight':
-					isDrawing = Math.random() > .833;
-					break;
-				case 'light':
-					isDrawing = Math.random() > .666;
-					break;
-				case 'dark':
-					isDrawing = Math.random() > .333;
-					break;
-				case 'verydark':
-					isDrawing = Math.random() > .166;
-					break;							
-			}
+			var chance = { verylight: .833, light: .666, none: .5, dark: .333, verydark: .166 };
+			isDrawing = Math.random() > chance[bias];
 			if (isDrawing) {						
 				context.fillRect(x * size, y * size, size, size);
-			}							
+			}
 			break;
 		case 'greyscale':
-			var start = 0, end = 255;
-			switch (bias) {
-				case 'verylight':
-					[start, end] = [255 / 2, 255];
-					break;
-				case 'light':
-					[start, end] = [255 / 4, 255];
-					break;
-				case 'dark':
-					[start, end] = [0, 255 / 2];
-					break;
-				case 'verydark':
-					[start, end] = [0, 255 / 4];
-					break;							
-			}					
+			var ranges = { verylight: [255 / 2, 255], light: [255 / 4, 255], none: [0, 255], dark: [0, 255 / 2], verydark: [0, 255 / 4]}
+			var start, end;
+			[start, end] = ranges[bias];
 			var grey = rand(start, end);
 			context.fillStyle = 'rgb(' + grey + ',' + grey + ',' + grey + ')';
 			context.fillRect(x * size, y * size, size, size);
