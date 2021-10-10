@@ -90,43 +90,7 @@ function handleColours(colours, context, size, x, y, bias) {
 			context.fillRect(x * size, y * size, size, size);
 			break;
 		case 'red':
-			var start = 0, end = 255;
-			switch (bias) {
-				case 'verylight':
-					[start, end] = [170, 255];
-					break;
-				case 'light':
-					[start, end] = [128, 255];
-					break;
-				case 'dark':
-					[start, end] = [0, 128];
-					break;
-				case 'verydark':
-					[start, end] = [0, 85];
-					break;							
-			}				
-			context.fillStyle = 'rgb(' + rand(start, end) + ',0,0)';
-			context.fillRect(x * size, y * size, size, size);
-			break;						
 		case 'green':
-			var start = 0, end = 255;
-			switch (bias) {
-				case 'verylight':
-					[start, end] = [170, 255];
-					break;
-				case 'light':
-					[start, end] = [128, 255];
-					break;
-				case 'dark':
-					[start, end] = [0, 128];
-					break;
-				case 'verydark':
-					[start, end] = [0, 85];
-					break;							
-			}				
-			context.fillStyle = 'rgb(0,' + rand(start, end) + ',0)';
-			context.fillRect(x * size, y * size, size, size);
-			break;	
 		case 'blue':
 			var start = 0, end = 255;
 			switch (bias) {
@@ -143,9 +107,19 @@ function handleColours(colours, context, size, x, y, bias) {
 					[start, end] = [0, 85];
 					break;							
 			}				
-			context.fillStyle = 'rgb(0,0,' + rand(start, end) + ')';
+			switch (colours) {
+				case 'red':
+					context.fillStyle = 'rgb(' + rand(start, end) + ',0,0)';		
+					break;
+				case 'green':
+					context.fillStyle = 'rgb(0,' + rand(start, end) + ',0)';		
+					break;
+				case 'blue':
+					context.fillStyle = 'rgb(0,0,' + rand(start, end) + ')';		
+					break;
+			}			
 			context.fillRect(x * size, y * size, size, size);
-			break;	
+			break;
 		case 'space_greyscale':
 			var start = 0, end = 30;
 			switch (bias) {
