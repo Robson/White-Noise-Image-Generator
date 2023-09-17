@@ -14,14 +14,14 @@
 		The script above is for google analytics.
 		You'll want to remove that if you use this page.
 		************************************************
-		-->	
-		<title>White Noise Image Generator</title>		
-		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		-->
+		<title>White Noise Image Generator</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<script src="https://d3js.org/d3.v3.min.js"></script>
 		<link rel="preconnect" href="https://fonts.gstatic.com">
-		<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rubik&display=swap"> 		
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rubik&display=swap">
 		<link rel="stylesheet" type="text/css" href="style.css">
 	</head>
 	<body>
@@ -34,13 +34,13 @@
 		<p>
 			Amount of squares horizontally:
 			<input type="number" id="lengthH" min="1" value="50" onkeyup="stats()" onchange="stats()" />
-			<br/>
+			<br>
 			Amount of squares vertically:
 			<input type="number" id="lengthV" min="1" value="25" onkeyup="stats()" onchange="stats()" />
-			<br/>
+			<br>
 			Size of squares:
 			<input type="number" id="size" min="1" value="5" onkeyup="stats()" onchange="stats()" />
-			<br/>
+			<br>
 			Colours:
 			<select id="colours">
 				<option value="monochrome">Monochrome</option>
@@ -48,7 +48,7 @@
 				<option disabled>――――――</option>
 				<option value="rgb_3bit">RGB 3-Bit</option>
 				<option value="rgb_6bit" selected>RGB 6-Bit</option>
-				<option value="rgb_12bit">RGB 12-Bit (Websafe)</option>				
+				<option value="rgb_12bit">RGB 12-Bit (Websafe)</option>
 				<option value="rgb_24bit">RGB 24-Bit (Truecolour)</option>
 				<option disabled>――――――</option>
 				<option value="red">Red</option>
@@ -57,10 +57,10 @@
 				<!--
 				<option disabled>――――――</option>
 				<option value="space_greyscale">Space (Greyscale)</option>
-				<option value="space_all">Space (All Colours)</option>				
+				<option value="space_all">Space (All Colours)</option>
 				-->
 			</select>
-			<br />
+			<br>
 			Bias:
 			<select id="bias">
 				<option value="verylight">Very Light</option>
@@ -71,14 +71,14 @@
 			</select>
 		</p>
 		<p>
-			<span id="warning" style="display:none;">Warning: this is massive and may freeze/crash your browser!<br/></span>
+			<span id="warning" style="display:none;">Warning: this is massive and may freeze/crash your browser!<br></span>
 			<input type="button" id="generate" value="Generate" onclick="generate()" />
 		</p>
 		<canvas id="noisy"></canvas>
 		<img id="output" alt="White Noise" src="blank.png" />
 		<p>
 			Written by <a href="https://robson.plus">Robson</a>. <a href="https://github.com/Robson/White-Noise-Image-Generator">View the code</a>.
-		</p>		
+		</p>
 		<script src="page.js"></script>
 	</body>
 </html>
